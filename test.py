@@ -18,7 +18,7 @@ Url = "https://www.oldbaileyonline.org/browse.jsp?id=t17800628-33&div=t17800628-
 InputUrl = urlopen(Url)
 InputText = InputUrl.read()
 
-# use BeautifulSoup to strip HTML
+# use BeautifulSoup to strip HTML tags
 soup = bs(InputText, "html.parser")
 text = soup.get_text().lower() # get text and convert to lower case
 
@@ -32,6 +32,8 @@ ListOnlyAlpha = re.compile('[a-zA-Z]+').findall(cleanedText)
 wordFreqList = []
 for istr in ListOnlyAlpha:
     wordFreqList.append([istr, ListOnlyAlpha.count(istr)])
+
+sortedList = sorted(wordFreqList, key=lambda t:t[1])
 
 # for istr in wordFreqList:
     # if (istr[1] > 1):
